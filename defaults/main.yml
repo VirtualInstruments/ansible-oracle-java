@@ -19,3 +19,4 @@ java_remove_download: true
 java_install_jce: false
 
 java_set_javahome: false
+java_validate_certs: true

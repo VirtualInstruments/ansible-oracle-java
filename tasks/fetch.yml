@@ -1,3 +1,4 @@
+---
 #
 # fetch .rpm or .tar.gz files
 #
@@ -7,6 +8,7 @@
     url:     "{{ jdk_tarball_url }}.rpm"
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
     dest:    "{{ java_download_path }}/{{ jdk_tarball_file }}.rpm"
+    validate_certs: "{{ java_validate_certs }}"
   when: (ansible_pkg_mgr == "yum" or ansible_pkg_mgr == "zypper") and ansible_os_family != 'Darwin'
 
 
@@ -15,6 +17,7 @@
     url:     "{{ jdk_tarball_url }}.tar.gz"
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
     dest:    "{{ java_download_path }}/{{ jdk_tarball_file }}.tar.gz"
+    validate_certs: "{{ java_validate_certs }}"
   when: ansible_pkg_mgr != "yum" or ansible_pkg_mgr != "zypper" and ansible_os_family != 'Darwin'
 
 - name: get JDK package (as Mac OS X .dmg)
@@ -22,6 +25,7 @@
     url:     "{{ jdk_tarball_url }}.dmg"
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
     dest:    "{{ java_download_path }}/{{ jdk_tarball_file }}.dmg"
+    validate_certs: "{{ java_validate_certs }}"
   when: ansible_os_family == 'Darwin'
 
 - name: get JCE
@@ -29,4 +33,5 @@
     url:     "{{ jce_zip_url }}"
     headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
     dest:    "{{ java_download_path }}/{{ jce_zip_file }}"
+    validate_certs: "{{ java_validate_certs }}"
   when: java_install_jce
