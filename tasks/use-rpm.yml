@@ -17,6 +17,7 @@
   yum:
     name: "{{ java_download_path }}/{{ jdk_tarball_file }}.rpm"
     state: present
+    disable_gpg_check: true
   when: ansible_pkg_mgr == "yum"
 
 # Cannot use zypper module: https://github.com/ansible/ansible-modules-extras/issues/2094
